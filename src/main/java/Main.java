@@ -1,11 +1,8 @@
-import Factory.Notification;
-import Factory.NotificationFactory;
-import Factory.NotificationType;
+import Singleton.Logger;
 
 public class Main {
     public static void main(String[] args){
-        NotificationFactory notificationFactory= new NotificationFactory();
-        Notification notification = notificationFactory.getNotificationSystem(NotificationType.EMAIL);
-        notification.send("LOL");
+        Logger logger = Logger.getInstance();
+        logger.log("LOL");
     }
 }
