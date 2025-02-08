@@ -1,19 +1,14 @@
-import AbstractFactory.*;
+import Adapter.LegacyBankAPi;
+import Adapter.LegacyBankAdapter;
+import Adapter.PaymentProcessor;
+import Adapter.StripePayment;
+
 
 public class Main {
     public static void main(String[] args){
-        OSFactory osFactory = new OSFactory();
-
-        OS windowsOS = osFactory.getOS(OSType.WINDOWS);
-        Button windowsButton = windowsOS.createButton();
-        Checkbox windowsCheckbox = windowsOS.createCheckbox();
-        windowsButton.render();
-        windowsCheckbox.render();
-
-        OS macOS = osFactory.getOS(OSType.MAC);
-        Button macButton = macOS.createButton();
-        Checkbox macCheckbox = macOS.createCheckbox();
-        macButton.render();
-        macCheckbox.render();
+        PaymentProcessor stripePayment = new StripePayment();
+        PaymentProcessor legacyPayment = new LegacyBankAdapter(new LegacyBankAPi());
+        stripePayment.doTransaction();
+        legacyPayment.doTransaction();
     }
 }
