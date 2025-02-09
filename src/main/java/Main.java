@@ -1,18 +1,26 @@
 import Bridge.*;
+import Composite.Directory;
+import Composite.File;
+import Composite.FileSystemComponent;
 
 
 public class Main {
     public static void main(String[] args){
-        Device tv = new TV();
-        Device radio = new Radio();
+        FileSystemComponent file1 = new File("Document.txt");
+        FileSystemComponent file2 = new File("Image.jpg");
+        FileSystemComponent file3 = new File("Spreadsheet.xlsx");
 
-        Remote basicRemote = new BasicRemote(tv);
-        Remote advancedRemote = new AdvancedRemote(radio);
+        Directory rootDirectory = new Directory("Root");
+        Directory documentsDirectory = new Directory("Documents");
+        Directory imagesDirectory = new Directory("Images");
 
-        basicRemote.turnOn();
-        basicRemote.turnOff();
+        documentsDirectory.addComponent(file1);
+        documentsDirectory.addComponent(file3);
+        imagesDirectory.addComponent(file2);
 
-        advancedRemote.turnOn();
-        advancedRemote.turnOff();
+        rootDirectory.addComponent(documentsDirectory);
+        rootDirectory.addComponent(imagesDirectory);
+
+        rootDirectory.showDetails();
     }
 }
