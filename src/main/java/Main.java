@@ -1,16 +1,22 @@
-import ChainOfResponibility.*;
+import Command.*;
 
 public class Main {
     public static void main(String[] args){
-        Logger infoLogger = new InfoLogger();
-        Logger debugLogger = new DebugLogger();
-        Logger errorLogger = new ErrorLogger();
+        Light light = new Light();
 
-        infoLogger.addNextLogger(debugLogger);
-        debugLogger.addNextLogger(errorLogger);
+        // Commands
+        Command lightOn = new LightOnCommand(light);
+        Command lightOff = new LightOffCommand(light);
 
-        infoLogger.logMessage(LoggerType.INFO, "This is an info message");
-        infoLogger.logMessage(LoggerType.DEBUG, "This is a debug message");
-        infoLogger.logMessage(LoggerType.ERROR, "This is an error message");
+        // Invoker
+        RemoteControl remote = new RemoteControl();
+
+        // Turn on the light
+        remote.setCommand(lightOn);
+        remote.pressButton();
+
+        // Turn off the light
+        remote.setCommand(lightOff);
+        remote.pressButton();
     }
 }
