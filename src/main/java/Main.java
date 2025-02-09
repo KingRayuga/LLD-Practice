@@ -1,22 +1,21 @@
 import Command.*;
+import Observer.CurrentConditionsDisplay;
+import Observer.StatisticsDisplay;
+import Observer.WeatherStation;
 
 public class Main {
     public static void main(String[] args){
-        Light light = new Light();
 
-        // Commands
-        Command lightOn = new LightOnCommand(light);
-        Command lightOff = new LightOffCommand(light);
+        WeatherStation weatherStation = new WeatherStation();
 
-        // Invoker
-        RemoteControl remote = new RemoteControl();
+        CurrentConditionsDisplay currentDisplay = new CurrentConditionsDisplay();
+        StatisticsDisplay statisticsDisplay = new StatisticsDisplay();
 
-        // Turn on the light
-        remote.setCommand(lightOn);
-        remote.pressButton();
+        weatherStation.registerObserver(currentDisplay);
+        weatherStation.registerObserver(statisticsDisplay);
 
-        // Turn off the light
-        remote.setCommand(lightOff);
-        remote.pressButton();
+        weatherStation.setMeasurements(25.0f, 65.0f, 1013.0f);
+        weatherStation.setMeasurements(26.5f, 70.0f, 1012.0f);
+        weatherStation.setMeasurements(24.0f, 60.0f, 1014.0f);
     }
 }
