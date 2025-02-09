@@ -1,12 +1,16 @@
-import Proxy.ProxySiteHandler;
+import ChainOfResponibility.*;
 
 public class Main {
     public static void main(String[] args){
-        ProxySiteHandler proxy = new ProxySiteHandler();
+        Logger infoLogger = new InfoLogger();
+        Logger debugLogger = new DebugLogger();
+        Logger errorLogger = new ErrorLogger();
 
-        proxy.addBlockedSite("www.blocked.com");
+        infoLogger.addNextLogger(debugLogger);
+        debugLogger.addNextLogger(errorLogger);
 
-        proxy.redirect("www.google.com");
-        proxy.redirect("www.blocked.com");
+        infoLogger.logMessage(LoggerType.INFO, "This is an info message");
+        infoLogger.logMessage(LoggerType.DEBUG, "This is a debug message");
+        infoLogger.logMessage(LoggerType.ERROR, "This is an error message");
     }
 }
