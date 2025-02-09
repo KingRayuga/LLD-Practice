@@ -1,15 +1,13 @@
-import Facade.*;
+import Flyweight.*;
 
 public class Main {
     public static void main(String[] args){
-        Amplifier amplifier = new Amplifier();
-        DVDPlayer dvdPlayer = new DVDPlayer();
-        Projector projector = new Projector();
+        CircleFlyweight factory = new CircleFlyweight();
 
-        HomeTheaterFacade homeTheater = new HomeTheaterFacade(amplifier, dvdPlayer, projector);
+        Circle c1 = factory.getCircle(5, "Red");
+        Circle c2 = factory.getCircle(10, "Blue");
+        Circle c3 = factory.getCircle(5, "Red");
 
-        homeTheater.watchMovie("Inception");
-
-        homeTheater.endMovie();
+        System.out.println(c1 == c3);
     }
 }
