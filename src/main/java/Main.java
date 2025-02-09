@@ -1,19 +1,15 @@
-import Decorator.*;
-
+import Facade.*;
 
 public class Main {
     public static void main(String[] args){
-        Notifier emailNotifier = new EmailNotitfier();
-        Notifier smsNotifier = new SMSNotifier(emailNotifier);
-        Notifier slackNotifier = new SlackNotifier(smsNotifier);
+        Amplifier amplifier = new Amplifier();
+        DVDPlayer dvdPlayer = new DVDPlayer();
+        Projector projector = new Projector();
 
-        System.out.println("🔹 Only Email:");
-        emailNotifier.sendNotification();
+        HomeTheaterFacade homeTheater = new HomeTheaterFacade(amplifier, dvdPlayer, projector);
 
-        System.out.println("\n🔹 Email + SMS:");
-        smsNotifier.sendNotification();
+        homeTheater.watchMovie("Inception");
 
-        System.out.println("\n🔹 Email + SMS + Slack:");
-        slackNotifier.sendNotification();
+        homeTheater.endMovie();
     }
 }
