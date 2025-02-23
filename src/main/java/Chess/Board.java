@@ -1,6 +1,7 @@
 package Chess;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
     private final int SIZE = 8;
@@ -62,10 +63,10 @@ public class Board {
             for (int j = 0; j < SIZE; j++) {
                 Piece piece = cells[i][j].getPiece();
                 if (piece != null && piece.getColor() != kingColor) {
-                    MoveStrategy strategy = piece.getMoveStrategy();
-                    if (strategy.isValidMove(cells[i][j], kingCell, this)) {
-                        return true;
-                    }
+//                    MoveStrategy strategy = piece.getMoveStrategy();
+//                    if (strategy.isValidMove(cells[i][j], kingCell, this)) {
+//                        return true;
+//                    }
                 }
             }
         }
